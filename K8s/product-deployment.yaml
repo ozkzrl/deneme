@@ -14,21 +14,7 @@ spec:
     spec:
       containers:
         - name: product
-          image: product-service:latest
-          ports:
-            - containerPort: 8000
+          image: dockozkan/product-service:latest  # Docker Hub imajı
           env:
             - name: RABBITMQ_HOST
               value: "rabbitmq"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: product-service
-spec:
-  selector:
-    app: product
-  ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000

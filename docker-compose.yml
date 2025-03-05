@@ -1,25 +1,19 @@
-version: "3.8"
-
+version: '3'
 services:
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    ports:
-      - "5672:5672"
-      - "15672:15672"
+  order-service:
+    build: ./order-service  # Dockerfile'ın bulunduğu dizin
+    image: dockozkan/order-service:latest  # Docker Hub'da kullanılacak imaj adı ve tag
+    environment:
+      - RABBITMQ_HOST=rabbitmq
 
   product-service:
-    build: ./product-service
-    ports:
-      - "8000:8000"
-    depends_on:
-      - rabbitmq
-
-  order-service:
-    build: ./order-service
-    depends_on:
-      - rabbitmq
+    build: ./product-service  # Dockerfile'ın bulunduğu dizin
+    image: dockozkan/product-service:latest  # Docker Hub'da kullanılacak imaj adı ve tag
+    environment:
+      - RABBITMQ_HOST=rabbitmq
 
   user-service:
-    build: ./user-service
-    ports:
-      - "8002:8002"
+    build: ./user-service  # Dockerfile'ın bulunduğu dizin
+    image: dockozkan/user-service:latest  # Docker Hub'da kullanılacak imaj adı ve tag
+    environment:
+      - RABBITMQ_HOST=rabbitmq

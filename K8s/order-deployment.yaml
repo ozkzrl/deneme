@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: order
-          image: order-service:latest
+          image: dockozkan/order-service:latest  # Docker Hub imajı
           env:
             - name: RABBITMQ_HOST
               value: "rabbitmq"
